@@ -3,21 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>OKR Tracker</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Team OKR Dashboard</h1>
-  <canvas id="okrChart" width="400" height="200"></canvas>
-  <form id="okr-form">
-    <input type="text" id="objective" class="wide" placeholder="Objective" required>
-    <input type="text" id="keyResult" class="wide" placeholder="Key Result" required>
-    <input type="number" id="progress" class="narrow" placeholder="Progress (%)" min="0" max="100" required>
-    <button type="submit">Add</button>
-  </form>
-  
+  <div class="tabs">
+    <button onclick="showTab('okr')">OKRs</button>
+    <button onclick="showTab('settings')">Settings</button>
+  </div>
 
-  <div id="okr-list"></div>
+  <div id="okr-tab">
+    <h1>Team OKR Dashboard</h1>
+
+    <form id="okr-form">
+      <input type="text" id="objective" class="wide" placeholder="Objective" required>
+      <input type="text" id="keyResult" class="wide" placeholder="Key Result" required>
+      <button type="submit">Add OKR</button>
+    </form>
+    
+
+    <canvas id="okrChart" width="400" height="150"></canvas>
+
+    <div style="margin-top: 1rem;">
+      <button onclick="exportToCSV()">Export to CSV</button><br>
+      <label><input type="radio" name="exportFilter" value="all" checked> Export All Tasks</label>
+      <label><input type="radio" name="exportFilter" value="overdue"> Export Only Overdue Tasks</label>
+    </div>
+
+    <div id="okr-list"></div>
+  </div>
+
+  <div id="settings-tab" style="display:none;">
+    <h2>Task Status Settings</h2>
+    <form id="status-form">
+      <input type="text" id="new-status" placeholder="Add new status">
+      <button type="submit">Add Status</button>
+    </form>
+    <ul id="status-list"></ul>
+  </div>
 
   <script src="script.js"></script>
 </body>
